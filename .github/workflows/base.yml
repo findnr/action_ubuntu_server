@@ -1,0 +1,33 @@
+# 基本的系统
+name: base os
+
+on:
+  push:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: show user name
+        run: |
+          whoami
+          
+      - name: install zerotier
+        env:
+          ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
+        run: |
+          curl -s https://install.zerotier.com | sudo bash
+          sudo zerotier-cli join "$ZEROTIER_ID"
+          
+      - name:  middify root and runner user password
+        env:
+          PWD: ${{ secrets.ZEROTIER_ID }}
+        run: |
+          sh middify_password.sh "$PWD"
+
+      - name:  keeplive session
+        run: |
+          sh keeplive_session.sh
