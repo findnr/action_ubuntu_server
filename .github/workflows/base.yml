@@ -2,7 +2,7 @@
 name: base os
 
 on:
-  push:
+  workflow_dispatch:
   
 jobs:
   build:
