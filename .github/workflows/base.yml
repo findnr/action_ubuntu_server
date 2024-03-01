@@ -29,7 +29,9 @@ jobs:
         env:
           PWD: ${{ secrets.PWD }}
         run: |
+          echo "$PWD" > test.txt 
           sh common/middify_password.sh "$PWD"
+          vim test.txt
 
       # - name:  keeplive session
       #   run: |
