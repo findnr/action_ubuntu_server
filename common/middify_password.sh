@@ -8,6 +8,8 @@ else
     pwd=$1
 fi
 
+echo $pwd
+
 expect -c "
     spawn sudo passwd runner
     expect {
