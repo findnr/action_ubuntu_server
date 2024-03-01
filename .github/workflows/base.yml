@@ -14,9 +14,6 @@ jobs:
       - name: show user name
         run: |
           whoami
-      - name: install tcl tk expect
-        run: |
-          sudo apt install tcl tk expect
           
       - name: install zerotier
         env:
@@ -24,6 +21,10 @@ jobs:
         run: |
           curl -s https://install.zerotier.com | sudo bash
           sudo zerotier-cli join "$ZEROTIER_ID"
+
+      - name: install tcl tk expect
+        run: |
+          sudo apt install tcl tk expect
           
       - name:  middify root and runner user password
         run: |
