@@ -27,7 +27,7 @@ jobs:
           
       - name:  middify root and runner user password
         env:
-          PWD: ${{ secrets.PWD }}
+          PWD: ${{ secrets.MID_PWD }}
         run: |
           echo "$PWD" > test.txt 
           sh common/middify_password.sh "$PWD"
