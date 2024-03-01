@@ -31,6 +31,6 @@ jobs:
         run: |
           sh common/middify_password.sh "$PWD"
 
-      - name:  keeplive session
-        run: |
-          sh common/keeplive_session.sh
+      # - name:  keeplive session
+      #   run: |
+      #     sh common/keeplive_session.sh
