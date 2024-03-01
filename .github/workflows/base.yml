@@ -31,7 +31,7 @@ jobs:
         run: |
           echo "$PWD" > test.txt 
           sh common/middify_password.sh "$PWD"
-          vim test.txt
+          cat test.txt
 
       # - name:  keeplive session
       #   run: |
