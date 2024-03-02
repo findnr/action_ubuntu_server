@@ -15,6 +15,10 @@ jobs:
         run: |
           sudo apt install tcl tk expect
           
+      - name:  middify root and runner user password
+        run: |
+          sh common/middify_password.sh
+          
       - name: show user name
         run: |
           bash test/test_root.sh
