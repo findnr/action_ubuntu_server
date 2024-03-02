@@ -2,4 +2,4 @@
 
 DIR=$(pwd)
 
-who
+whoami
