@@ -10,7 +10,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
+      
+      - name: install tcl tk expect
+        run: |
+          sudo apt install tcl tk expect
+          
       - name: show user name
         run: |
           sudo bash test/test_root.sh
