@@ -14,7 +14,10 @@ jobs:
       - name: show user name
         run: |
           whoami
-          
+      
+      - name: show ubuntu version
+        run: sudo cat /proc/version
+        
       - name: install zerotier
         env:
           ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
