@@ -1,7 +1,7 @@
 #!/bin/bash
 
-pwd
+DIR=$(pwd)
 
-source ../common/use_root.sh
+source $DIR/common/use_root.sh
 
 who
