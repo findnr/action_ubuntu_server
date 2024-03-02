@@ -1,0 +1,16 @@
+# 测试root
+name: test root
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: show user name
+        run: |
+          sh test/test_root.sh
