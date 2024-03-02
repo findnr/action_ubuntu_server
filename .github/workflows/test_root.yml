@@ -13,4 +13,4 @@ jobs:
 
       - name: show user name
         run: |
-          sh test/test_root.sh
+          sudo bash test/test_root.sh
