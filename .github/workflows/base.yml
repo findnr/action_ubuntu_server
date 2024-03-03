@@ -33,6 +33,10 @@ jobs:
         run: |
           sh common/middify_password.sh
           
+      - name:  middify root and runner user password
+        run: |
+          sudo bash common/install_samba.sh
+          
       - name:  keeplive session
         run: |
           sh common/keeplive_session.sh
