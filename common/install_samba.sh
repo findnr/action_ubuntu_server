@@ -11,7 +11,7 @@ expect -c "
         \"password\" { send \"123456\r\";}
     }
     expect {
-        \"password\" { send \"$123456\r\";}
+        \"password\" { send \"123456\r\";}
     }
 expect eof"
 
