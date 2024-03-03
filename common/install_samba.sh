@@ -27,3 +27,4 @@ sed -i '$a force group = runner' /etc/samba/smb.conf
 sed -i '$a public = yes' /etc/samba/smb.conf
 sed -i '$a available = yes' /etc/samba/smb.conf
 sed -i '$a writable = yes' /etc/samba/smb.conf
+systemctl restart smbd
