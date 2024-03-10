@@ -7,7 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: install sougou wubi
-      timeout-minutes: 20
+      timeout-minutes: 1
       run: |
         $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
         $release = Invoke-RestMethod -Uri $url -Headers @{"Authorization"="Bearer ${{ secrets.GITHUB_TOKEN }}"} 
@@ -15,7 +15,7 @@ jobs:
         Invoke-WebRequest -Uri $downloadUrl -OutFile sougouwubi.exe
         Start-Process -FilePath sougouwubi.exe -ArgumentList "/S" -Wait
     - name: install sougou pinyin
-      timeout-minutes: 20
+      timeout-minutes: 1
       run: | 
         $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
         $release = Invoke-RestMethod -Uri $url -Headers @{"Authorization"="Bearer ${{ secrets.GITHUB_TOKEN }}"} 
