@@ -11,14 +11,14 @@ jobs:
         $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
         $release = Invoke-RestMethod -Uri $url -Headers @{"Authorization"="Bearer ${{ secrets.GITHUB_TOKEN }}"} 
         $downloadUrl = $release.assets | Where-Object { $_.name -eq "sougouwubi.exe" } | Select-Object -ExpandProperty browser_download_url
-        Invoke-WebRequest -Uri $downloadUrl -OutFile "sougouwubi.exe"
-        Start-Process -FilePath "sougouwubi.exe" -ArgumentList "/qn /norestart" -Wait
+        Invoke-WebRequest -Uri $downloadUrl -OutFile sougouwubi.exe
+        Start-Process -FilePath sougouwubi.exe -ArgumentList "/qn /norestart" -Wait
         
-        $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
-        $release = Invoke-RestMethod -Uri $url -Headers @{"Authorization"="Bearer ${{ secrets.GITHUB_TOKEN }}"} 
-        $downloadUrl = $release.assets | Where-Object { $_.name -eq "sougoupinyin.exe" } | Select-Object -ExpandProperty browser_download_url
-        Invoke-WebRequest -Uri $downloadUrl -OutFile "sougoupinyin.exe"
-        Start-Process -FilePath "sougoupinyin.exe" -ArgumentList "/qn /norestart" -Wait
+        # $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
+        # $release = Invoke-RestMethod -Uri $url -Headers @{"Authorization"="Bearer ${{ secrets.GITHUB_TOKEN }}"} 
+        # $downloadUrl = $release.assets | Where-Object { $_.name -eq "sougoupinyin.exe" } | Select-Object -ExpandProperty browser_download_url
+        # Invoke-WebRequest -Uri $downloadUrl -OutFile "sougoupinyin.exe"
+        # Start-Process -FilePath "sougoupinyin.exe" -ArgumentList "/qn /norestart" -Wait
         # Write-Host "downloading wubi soft"
         # $wubiPath = "$env:TEMP\wubi.exe"
         # Invoke-WebRequest -Uri "https://github.com/findnr/actions_os/releases/download/untagged-2957a38f3ab1a2a115ec/sougouwubi.exe" -OutFile $wubiPath
