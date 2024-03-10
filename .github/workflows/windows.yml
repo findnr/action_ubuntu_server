@@ -6,7 +6,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
-    - name: setting info qaz,899136
+    - name: setting info qaz,123456
       env:
         ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
       run: |
@@ -16,6 +16,7 @@ jobs:
          Invoke-WebRequest -Uri "https://download.zerotier.com/dist/ZeroTier%20One.msi" -OutFile $installerPath
          Write-Host "install working ZeroTier..."
          Start-Process -FilePath "msiexec.exe" -ArgumentList "/i $installerPath /qn /norestart" -Wait
+         cd 'C:\Program Files (x86)\ZeroTier\One\'
          ./zerotier_desktop_ui.exe
          Start-Sleep -Seconds 60
          ./zerotier-cli join "${env:ZEROTIER_ID}"
@@ -23,6 +24,6 @@ jobs:
          ./zerotier-cli info
          ipconfig
          $currentUsername = $env:USERNAME
-         $defaultPassword = ConvertTo-SecureString "qaz,899136" -AsPlainText -Force
+         $defaultPassword = ConvertTo-SecureString "qaz,123456" -AsPlainText -Force
          Set-LocalUser -Name $currentUsername -Password $defaultPassword
          Start-Sleep -Seconds 25200
