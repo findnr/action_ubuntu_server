@@ -1,0 +1,28 @@
+name: windown-latest
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: setting info qaz,899136
+      env:
+        ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
+      run: |
+         $env:USERNAME
+         Write-Host "downloading ZeroTier msi progra..."
+         $installerPath = "$env:TEMP\ZeroTierInstaller.msi"
+         Invoke-WebRequest -Uri "https://download.zerotier.com/dist/ZeroTier%20One.msi" -OutFile $installerPath
+         Write-Host "install working ZeroTier..."
+         Start-Process -FilePath "msiexec.exe" -ArgumentList "/i $installerPath /qn /norestart" -Wait
+         ./zerotier_desktop_ui.exe
+         Start-Sleep -Seconds 60
+         ./zerotier-cli join "${env:ZEROTIER_ID}"
+         Start-Sleep -Seconds 10
+         ./zerotier-cli info
+         ipconfig
+         $currentUsername = $env:USERNAME
+         $defaultPassword = ConvertTo-SecureString "qaz,899136" -AsPlainText -Force
+         Set-LocalUser -Name $currentUsername -Password $defaultPassword
+         Start-Sleep -Seconds 25200
