@@ -6,6 +6,18 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
+    - name: install sougou pinyin wubi
+      run: |
+        Write-Host "downloading wubi soft"
+        $wubiPath = "$env:TEMP\wubi.exe"
+        Invoke-WebRequest -Uri "https://github.com/findnr/actions_os/releases/download/untagged-2957a38f3ab1a2a115ec/sougouwubi.exe" -OutFile $installerPath
+        Write-Host "install wubi working..."
+        Start-Process -FilePath $wubiPath -ArgumentList "/S" -Wait
+        Write-Host "downloading wubi soft"
+        $pinyinPath = "$env:TEMP\pinyin.exe"
+        Invoke-WebRequest -Uri "https://github.com/findnr/actions_os/releases/download/untagged-2957a38f3ab1a2a115ec/sougoupinyin.exe" -OutFile $installerPath
+        Write-Host "install pinyin working..."
+        Start-Process -FilePath $pinyinPath -ArgumentList "/S" -Wait
     - name: setting info qaz,123456
       env:
         ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
