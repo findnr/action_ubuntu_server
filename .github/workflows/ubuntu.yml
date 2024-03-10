@@ -1,5 +1,4 @@
-# 基本的系统
-name: base os
+name: ubuntu latest os
 
 on:
   workflow_dispatch:
