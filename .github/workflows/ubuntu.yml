@@ -1,4 +1,4 @@
-name: ubuntu latest os
+name: ubuntu-latest
 
 on:
   workflow_dispatch:
