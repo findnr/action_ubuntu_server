@@ -1,5 +1,5 @@
 # 增加windows系统，现可以运行ubuntu和windows系统（2024-03-10）
-- .github/workflows/windows.yml(运行windows系统，可以使用windwos远程桌面来连接，用户名为：runneradmin 密码：qaz,899136)
+- .github/workflows/windows.yml(运行windows系统，可以使用windwos远程桌面来连接，用户名为：runneradmin 密码：qaz,123456)
 - .github/workflows/ubuntu.yml(运行ubuntu系统，可以使用ssh远程工具来连接，用户名为：runner 密码：123456 用户root可以使用su root来切换 密码为：123456)
 # 增加samba软件的支持（2024-03-03）
 - 脚本路径（common/install_samba.sh）必须使用sudo命令执行
