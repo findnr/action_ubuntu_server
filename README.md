@@ -1,9 +1,12 @@
+# 增加windows系统，现可以运行ubuntu和windows系统（2024-03-10）
+- .github/workflows/windows.yml(运行windows系统，可以使用windwos远程桌面来连接，用户名为：runneradmin 密码：qaz,899136)
+- .github/workflows/ubuntu.yml(运行ubuntu系统，可以使用ssh远程工具来连接，用户名为：runner 密码：123456 用户root可以使用su root来切换 密码为：123456)
 # 增加samba软件的支持（2024-03-03）
 - 脚本路径（common/install_samba.sh）必须使用sudo命令执行
 - 自动配制runner用户名和密码（密码为：123456）
 - 运行完成成就可以使用smb进行访问
   
-# action_ubuntu_server
+# action_os
 使用actions zerotier创建一台可以在本地远程连接的的ubuntu虚拟机，免费使用6小时，服务器配制为4核16G内存，创建的服务器就可以配制一些开发环境，下次使用时启动就可以了。
 # 第一步
 - https://www.zerotier.com 注册一个帐号
