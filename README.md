@@ -1,3 +1,6 @@
+# 增加openwrt_lede项目的编译脚本，可编译（x86,r68s）的固件，r68s固件IP地址：192.168.1.180 x86固件的IP地址：192.168.1.181 (2024-03-11)
+- openwrt_lede/r68s_auto.sh (r68s固件)
+- openwrt_lede/x86_auto.sh (x86固件)
 # 增加windows系统，现可以运行ubuntu和windows系统（2024-03-10）
 - .github/workflows/windows.yml(运行windows系统，可以使用windwos远程桌面来连接，用户名为：runneradmin 密码：qaz,123456)
 - .github/workflows/ubuntu.yml(运行ubuntu系统，可以使用ssh远程工具来连接，用户名为：runner 密码：123456 用户root可以使用su root来切换 密码为：123456)
