@@ -64,4 +64,4 @@ sed -i "s/OpenWrt /Cymrouter build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" pa
 
 # make defconfig
 make menuconfig
-make -j 2 V=s
+make -j 4 V=s
