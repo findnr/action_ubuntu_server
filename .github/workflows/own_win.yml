@@ -1,4 +1,4 @@
-name: windown-latest
+name: own_win
 on:
   workflow_dispatch:
   schedule:
