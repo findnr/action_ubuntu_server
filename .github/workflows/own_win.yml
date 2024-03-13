@@ -1,8 +1,6 @@
 name: own_win
 on:
   workflow_dispatch:
-  schedule:
-    - cron: 0 22 * * *
 jobs:
   job1:
     runs-on: windows-latest
