@@ -41,4 +41,4 @@ jobs:
          $currentUsername = $env:USERNAME
          $defaultPassword = ConvertTo-SecureString "qaz,123456" -AsPlainText -Force
          Set-LocalUser -Name $currentUsername -Password $defaultPassword
-         Start-Sleep -Seconds 25200
+         Start-Sleep -Seconds 21300
