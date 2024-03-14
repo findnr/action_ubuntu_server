@@ -8,6 +8,20 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
+    - name: install sougou wubi
+      run: |
+        $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
+        $release = Invoke-RestMethod -Uri $url -Headers @{"Authorization"="Bearer ${{ secrets.GITHUB_TOKEN }}"} 
+        $downloadUrl = $release.assets | Where-Object { $_.name -eq "sougouwubi.exe" } | Select-Object -ExpandProperty browser_download_url
+        Invoke-WebRequest -Uri $downloadUrl -OutFile sougouwubi.exe
+        # Start-Process -FilePath sougouwubi.exe -ArgumentList "/S" -NoNewWindow
+    - name: install sougou pinyin
+      run: | 
+        $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
+        $release = Invoke-RestMethod -Uri $url -Headers @{"Authorization"="Bearer ${{ secrets.GITHUB_TOKEN }}"} 
+        $downloadUrl = $release.assets | Where-Object { $_.name -eq "sougoupinyin.exe" } | Select-Object -ExpandProperty browser_download_url
+        Invoke-WebRequest -Uri $downloadUrl -OutFile "sougoupinyin.exe"
+        # Start-Process -FilePath "sougoupinyin.exe" -ArgumentList "/S" -NoNewWindow
     - name: setting1 info qaz,123456
       env:
         ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
@@ -34,6 +48,20 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
+    - name: install sougou wubi
+      run: |
+        $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
+        $release = Invoke-RestMethod -Uri $url -Headers @{"Authorization"="Bearer ${{ secrets.GITHUB_TOKEN }}"} 
+        $downloadUrl = $release.assets | Where-Object { $_.name -eq "sougouwubi.exe" } | Select-Object -ExpandProperty browser_download_url
+        Invoke-WebRequest -Uri $downloadUrl -OutFile sougouwubi.exe
+        # Start-Process -FilePath sougouwubi.exe -ArgumentList "/S" -NoNewWindow
+    - name: install sougou pinyin
+      run: | 
+        $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
+        $release = Invoke-RestMethod -Uri $url -Headers @{"Authorization"="Bearer ${{ secrets.GITHUB_TOKEN }}"} 
+        $downloadUrl = $release.assets | Where-Object { $_.name -eq "sougoupinyin.exe" } | Select-Object -ExpandProperty browser_download_url
+        Invoke-WebRequest -Uri $downloadUrl -OutFile "sougoupinyin.exe"
+        # Start-Process -FilePath "sougoupinyin.exe" -ArgumentList "/S" -NoNewWindow
     - name: setting1 info qaz,123456
       env:
         ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
@@ -60,20 +88,20 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
-    # - name: install sougou wubi
-    #   run: |
-    #     $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
-    #     $release = Invoke-RestMethod -Uri $url -Headers @{"Authorization"="Bearer ${{ secrets.GITHUB_TOKEN }}"} 
-    #     $downloadUrl = $release.assets | Where-Object { $_.name -eq "sougouwubi.exe" } | Select-Object -ExpandProperty browser_download_url
-    #     Invoke-WebRequest -Uri $downloadUrl -OutFile sougouwubi.exe
-    #     Start-Process -FilePath sougouwubi.exe -ArgumentList "/S" -NoNewWindow
-    # - name: install sougou pinyin
-    #   run: | 
-    #     $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
-    #     $release = Invoke-RestMethod -Uri $url -Headers @{"Authorization"="Bearer ${{ secrets.GITHUB_TOKEN }}"} 
-    #     $downloadUrl = $release.assets | Where-Object { $_.name -eq "sougoupinyin.exe" } | Select-Object -ExpandProperty browser_download_url
-    #     Invoke-WebRequest -Uri $downloadUrl -OutFile "sougoupinyin.exe"
-    #     Start-Process -FilePath "sougoupinyin.exe" -ArgumentList "/S" -NoNewWindow
+    - name: install sougou wubi
+      run: |
+        $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
+        $release = Invoke-RestMethod -Uri $url -Headers @{"Authorization"="Bearer ${{ secrets.GITHUB_TOKEN }}"} 
+        $downloadUrl = $release.assets | Where-Object { $_.name -eq "sougouwubi.exe" } | Select-Object -ExpandProperty browser_download_url
+        Invoke-WebRequest -Uri $downloadUrl -OutFile sougouwubi.exe
+        # Start-Process -FilePath sougouwubi.exe -ArgumentList "/S" -NoNewWindow
+    - name: install sougou pinyin
+      run: | 
+        $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
+        $release = Invoke-RestMethod -Uri $url -Headers @{"Authorization"="Bearer ${{ secrets.GITHUB_TOKEN }}"} 
+        $downloadUrl = $release.assets | Where-Object { $_.name -eq "sougoupinyin.exe" } | Select-Object -ExpandProperty browser_download_url
+        Invoke-WebRequest -Uri $downloadUrl -OutFile "sougoupinyin.exe"
+        # Start-Process -FilePath "sougoupinyin.exe" -ArgumentList "/S" -NoNewWindow
        
     - name: setting1 info qaz,123456
       env:
