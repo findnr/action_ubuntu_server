@@ -12,7 +12,7 @@ jobs:
         $release = Invoke-RestMethod -Uri $url -Headers @{"Authorization"="Bearer ${{ secrets.GITHUB_TOKEN }}"} 
         $downloadUrl = $release.assets | Where-Object { $_.name -eq "sougouwubi.exe" } | Select-Object -ExpandProperty browser_download_url
         Invoke-WebRequest -Uri $downloadUrl -OutFile sougouwubi.exe
-        Start-Process -FilePath sougouwubi.exe -ArgumentList "/quiet /norestart" -Wait -NoNewWindow
+        Start-Process -FilePath "sougouwubi.exe" -ArgumentList "/quiet /norestart" -Wait -NoNewWindow
     # - name: install sougou pinyin
     #   run: | 
     #     $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
