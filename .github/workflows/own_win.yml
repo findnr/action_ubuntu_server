@@ -43,6 +43,22 @@ jobs:
          $defaultPassword = ConvertTo-SecureString "qaz,123456" -AsPlainText -Force
          Set-LocalUser -Name $currentUsername -Password $defaultPassword
          Start-Sleep -Seconds 21300
+    - name: delete network job1
+      env:
+        ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
+        ZEROTIER_TOKEN: ${{ secrets.ZEROTIER_TOKEN }}
+      run: |
+        $response = Invoke-RestMethod -Uri "https://api.zerotier.com/api/v1/network/${env:ZEROTIER_ID}/member" -Headers @{"Authorization" = "token ${env:ZEROTIER_TOKEN}"} -Method Get -ContentType "application/json"
+        $networkAdapter = Get-NetIPAddress -InterfaceAlias "*One*" -AddressFamily IPv4
+        foreach ($item in $response) {
+            if ($item.config.ipAssignments -eq $networkAdapter.IPAddress) {
+                $tmp=$item.nodeId
+                Invoke-RestMethod -Uri "https://api.zerotier.com/api/v1/network/${env:ZEROTIER_ID}/member/$tmp" -Headers @{"Authorization" = "token ${env:ZEROTIER_TOKEN}"} -Method Delete
+                Write-Output $item.nodeId
+            } else {
+                Write-Output "Strings are not equal"
+            }
+        }
   job2:
     needs: job1
     runs-on: windows-latest
@@ -83,6 +99,22 @@ jobs:
          $defaultPassword = ConvertTo-SecureString "qaz,123456" -AsPlainText -Force
          Set-LocalUser -Name $currentUsername -Password $defaultPassword
          Start-Sleep -Seconds 21300
+    - name: delete network job2
+      env:
+        ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
+        ZEROTIER_TOKEN: ${{ secrets.ZEROTIER_TOKEN }}
+      run: |
+        $response = Invoke-RestMethod -Uri "https://api.zerotier.com/api/v1/network/${env:ZEROTIER_ID}/member" -Headers @{"Authorization" = "token ${env:ZEROTIER_TOKEN}"} -Method Get -ContentType "application/json"
+        $networkAdapter = Get-NetIPAddress -InterfaceAlias "*One*" -AddressFamily IPv4
+        foreach ($item in $response) {
+            if ($item.config.ipAssignments -eq $networkAdapter.IPAddress) {
+                $tmp=$item.nodeId
+                Invoke-RestMethod -Uri "https://api.zerotier.com/api/v1/network/${env:ZEROTIER_ID}/member/$tmp" -Headers @{"Authorization" = "token ${env:ZEROTIER_TOKEN}"} -Method Delete
+                Write-Output $item.nodeId
+            } else {
+                Write-Output "Strings are not equal"
+            }
+        }
   job3:
     needs: [job1, job2]
     runs-on: windows-latest
@@ -124,4 +156,20 @@ jobs:
          $defaultPassword = ConvertTo-SecureString "qaz,123456" -AsPlainText -Force
          Set-LocalUser -Name $currentUsername -Password $defaultPassword
          Start-Sleep -Seconds 21300
+    - name: delete network job3
+      env:
+        ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
+        ZEROTIER_TOKEN: ${{ secrets.ZEROTIER_TOKEN }}
+      run: |
+        $response = Invoke-RestMethod -Uri "https://api.zerotier.com/api/v1/network/${env:ZEROTIER_ID}/member" -Headers @{"Authorization" = "token ${env:ZEROTIER_TOKEN}"} -Method Get -ContentType "application/json"
+        $networkAdapter = Get-NetIPAddress -InterfaceAlias "*One*" -AddressFamily IPv4
+        foreach ($item in $response) {
+            if ($item.config.ipAssignments -eq $networkAdapter.IPAddress) {
+                $tmp=$item.nodeId
+                Invoke-RestMethod -Uri "https://api.zerotier.com/api/v1/network/${env:ZEROTIER_ID}/member/$tmp" -Headers @{"Authorization" = "token ${env:ZEROTIER_TOKEN}"} -Method Delete
+                Write-Output $item.nodeId
+            } else {
+                Write-Output "Strings are not equal"
+            }
+        }
 
