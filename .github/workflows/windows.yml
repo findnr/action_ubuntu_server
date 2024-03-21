@@ -51,7 +51,8 @@ jobs:
         $networkAdapter = Get-NetIPAddress -InterfaceAlias "*One*" -AddressFamily IPv4
         foreach ($item in $response) {
             if ($item.config.ipAssignments -eq $networkAdapter.IPAddress) {
-                $response = Invoke-RestMethod -Uri "https://api.zerotier.com/api/v1/network/${env:ZEROTIER_ID}/member/$item.nodeId" -Headers @{"Authorization" = "token ${env:ZEROTIER_TOKEN}"} -Method Delete
+                $tmp=$item.nodeId
+                Invoke-RestMethod -Uri "https://api.zerotier.com/api/v1/network/${env:ZEROTIER_ID}/member/$tmp" -Headers @{"Authorization" = "token ${env:ZEROTIER_TOKEN}"} -Method Delete
                 Write-Output $item.nodeId
             } else {
                 Write-Output "Strings are not equal"
