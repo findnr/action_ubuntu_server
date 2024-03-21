@@ -45,7 +45,7 @@ jobs:
     - name: delete network node
       env:
         ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
-        ZEROTIER_TOKEN: ${{ecrets.ZEROTIER_TOKEN}}
+        ZEROTIER_TOKEN: ${{ secrets.ZEROTIER_TOKEN }}
       run: |
         $response = Invoke-RestMethod -Uri "https://api.zerotier.com/api/v1/network/${env:ZEROTIER_ID}/member" -Headers @{"Authorization" = "token ${env:ZEROTIER_TOKEN}"} -Method Get -ContentType "application/json"
         $networkAdapter = Get-NetIPAddress -InterfaceAlias "*One*" -AddressFamily IPv4
