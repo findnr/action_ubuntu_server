@@ -41,4 +41,19 @@ jobs:
          $currentUsername = $env:USERNAME
          $defaultPassword = ConvertTo-SecureString "qaz,123456" -AsPlainText -Force
          Set-LocalUser -Name $currentUsername -Password $defaultPassword
-         Start-Sleep -Seconds 21300
+         Start-Sleep -Seconds 60
+    - name: delete network node
+      env:
+        ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
+        ZEROTIER_TOKEN: ${{ecrets.ZEROTIER_TOKEN}}
+      run: |
+        $response = Invoke-RestMethod -Uri "https://api.zerotier.com/api/v1/network/${env:ZEROTIER_ID}/member" -Headers @{"Authorization" = "token ${env:ZEROTIER_TOKEN}"} -Method Get -ContentType "application/json"
+        $networkAdapter = Get-NetIPAddress -InterfaceAlias "*One*" -AddressFamily IPv4
+        foreach ($item in $response) {
+            if ($item.config.ipAssignments -eq $networkAdapter.IPAddress) {
+                $response = Invoke-RestMethod -Uri "https://api.zerotier.com/api/v1/network/${env:ZEROTIER_ID}/member/$item.nodeId" -Headers @{"Authorization" = "token ${env:ZEROTIER_TOKEN}"} -Method DELETE -ContentType "application/json"
+                Write-Output $item.nodeId
+            } else {
+                Write-Output "Strings are not equal"
+            }
+        }
