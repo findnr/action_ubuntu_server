@@ -13,7 +13,7 @@ jobs:
       - name: show user name
         run: |
           whoami
-      
+          
       - name: show ubuntu version
         run: sudo cat /proc/version
         
@@ -42,9 +42,7 @@ jobs:
           ZEROTIER_TOKEN: ${{ secrets.ZEROTIER_TOKEN }}
         run: |
           ip addr
-          sleep 60
-          ip addr
-          # sleep 21300
+          sleep 21420
           partial_name="ztrf"
           interfaces=$(ip addr show | grep -oP "(?<=: )$partial_name\S*")
           for interface in $interfaces; do
