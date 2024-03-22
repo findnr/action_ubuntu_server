@@ -56,7 +56,8 @@ jobs:
               zero_ip=$(echo "$obj" | jq -r '.config.ipAssignments[0]')
               if [ "$ip_address" = "$zero_ip" ]; then
                   nodeId=$(echo "$obj" | jq -r '.nodeId')
-                  curl -X DELETE -H "Authorization: token $ZEROTIER_TOKEN" https://api.zerotier.com/api/v1/network/$ZEROTIER_ID//member/$nodeId
+                  urls="https://api.zerotier.com/api/v1/network/$ZEROTIER_ID/member/$nodeId"
+                  json_response=$(curl -s -X DELETE -H "Authorization: token $ZEROTIER_TOKEN" "$urls")
               else
                   echo "Strings are not equal"
               fi
