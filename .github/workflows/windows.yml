@@ -24,6 +24,8 @@ jobs:
     - name: setting info qaz,123456
       env:
         ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
+        WX_PUSH_APP_TOKEN: ${{ secrets.WX_PUSH_APP_TOKEN }}
+        WX_UID: ${{ secrets.WX_UID }}
       run: |
          $env:USERNAME
          Write-Host "downloading ZeroTier msi progra..."
@@ -41,6 +43,9 @@ jobs:
          $currentUsername = $env:USERNAME
          $defaultPassword = ConvertTo-SecureString "qaz,123456" -AsPlainText -Force
          Set-LocalUser -Name $currentUsername -Password $defaultPassword
+         $networkAdapter = Get-NetIPAddress -InterfaceAlias "*One*" -AddressFamily IPv4
+         $response=Invoke-RestMethod -Uri "https://wxpusher.zjiecode.com/api/send/message/?appToken=${env:WX_PUSH_APP_TOKEN}&content=win:$networkAdapter.IPAddress&uid=${env:WX_UID}&url=http%3a%2f%2fwxpusher.zjiecode.com" -Method Get
+         Write-Output $response
          Start-Sleep -Seconds 21300
     - name: delete network node
       env:
