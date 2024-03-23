@@ -49,7 +49,7 @@ jobs:
           for interface in $interfaces; do
               ip_address=$(ip addr show $interface | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
           done
-          wx_push_url="https://wxpusher.zjiecode.com/api/send/message/?appToken=$WX_PUSH_APP_TOKEN&content=ubuntu:$ip_address&uid=$WX_UID&url=http%3a%2f%2fwxpusher.zjiecode.com"
+          wx_push_url="https://wxpusher.zjiecode.com/api/send/message/?appToken=$WX_PUSH_APP_TOKEN&content=ownubuntu:$ip_address&uid=$WX_UID&url=http%3a%2f%2fwxpusher.zjiecode.com"
           wx_data=$(curl -s "$wx_push_url")
           echo $wx_data
           sleep 21420
@@ -111,7 +111,7 @@ jobs:
           for interface in $interfaces; do
               ip_address=$(ip addr show $interface | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
           done
-          wx_push_url="https://wxpusher.zjiecode.com/api/send/message/?appToken=$WX_PUSH_APP_TOKEN&content=ubuntu:$ip_address&uid=$WX_UID&url=http%3a%2f%2fwxpusher.zjiecode.com"
+          wx_push_url="https://wxpusher.zjiecode.com/api/send/message/?appToken=$WX_PUSH_APP_TOKEN&content=ownubuntu:$ip_address&uid=$WX_UID&url=http%3a%2f%2fwxpusher.zjiecode.com"
           wx_data=$(curl -s "$wx_push_url")
           echo $wx_data
           sleep 21420
@@ -173,7 +173,7 @@ jobs:
           for interface in $interfaces; do
               ip_address=$(ip addr show $interface | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
           done
-          wx_push_url="https://wxpusher.zjiecode.com/api/send/message/?appToken=$WX_PUSH_APP_TOKEN&content=ubuntu:$ip_address&uid=$WX_UID&url=http%3a%2f%2fwxpusher.zjiecode.com"
+          wx_push_url="https://wxpusher.zjiecode.com/api/send/message/?appToken=$WX_PUSH_APP_TOKEN&content=ownubuntu:$ip_address&uid=$WX_UID&url=http%3a%2f%2fwxpusher.zjiecode.com"
           wx_data=$(curl -s "$wx_push_url")
           echo $wx_data
           sleep 21420
