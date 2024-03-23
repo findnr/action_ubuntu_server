@@ -40,14 +40,19 @@ jobs:
         env:
           ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
           ZEROTIER_TOKEN: ${{ secrets.ZEROTIER_TOKEN }}
+          WX_PUSH_APP_TOKEN: ${{ secrets.WX_PUSH_APP_TOKEN }}
+          WX_UID: ${{ secrets.WX_UID }}
         run: |
           ip addr
-          sleep 21420
           partial_name="ztrf"
           interfaces=$(ip addr show | grep -oP "(?<=: )$partial_name\S*")
           for interface in $interfaces; do
               ip_address=$(ip addr show $interface | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
           done
+          wx_push_url="https://wxpusher.zjiecode.com/api/send/message/?appToken=$WX_PUSH_APP_TOKEN&content=ubuntu:$ip_address&uid=$WX_UID&url=http%3a%2f%2fwxpusher.zjiecode.com"
+          wx_data=$(curl -s "$wx_push_url")
+          echo $wx_data
+          sleep 21420
           url="https://api.zerotier.com/api/v1/network/$ZEROTIER_ID/member"
           json_response=$(curl -s -X GET -H "Authorization: token $ZEROTIER_TOKEN" "$url")
           echo "$json_response" | jq -c '.[]' | while read -r obj; do
@@ -97,14 +102,19 @@ jobs:
         env:
           ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
           ZEROTIER_TOKEN: ${{ secrets.ZEROTIER_TOKEN }}
+          WX_PUSH_APP_TOKEN: ${{ secrets.WX_PUSH_APP_TOKEN }}
+          WX_UID: ${{ secrets.WX_UID }}
         run: |
           ip addr
-          sleep 21420
           partial_name="ztrf"
           interfaces=$(ip addr show | grep -oP "(?<=: )$partial_name\S*")
           for interface in $interfaces; do
               ip_address=$(ip addr show $interface | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
           done
+          wx_push_url="https://wxpusher.zjiecode.com/api/send/message/?appToken=$WX_PUSH_APP_TOKEN&content=ubuntu:$ip_address&uid=$WX_UID&url=http%3a%2f%2fwxpusher.zjiecode.com"
+          wx_data=$(curl -s "$wx_push_url")
+          echo $wx_data
+          sleep 21420
           url="https://api.zerotier.com/api/v1/network/$ZEROTIER_ID/member"
           json_response=$(curl -s -X GET -H "Authorization: token $ZEROTIER_TOKEN" "$url")
           echo "$json_response" | jq -c '.[]' | while read -r obj; do
@@ -154,14 +164,19 @@ jobs:
         env:
           ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
           ZEROTIER_TOKEN: ${{ secrets.ZEROTIER_TOKEN }}
+          WX_PUSH_APP_TOKEN: ${{ secrets.WX_PUSH_APP_TOKEN }}
+          WX_UID: ${{ secrets.WX_UID }}
         run: |
           ip addr
-          sleep 21420
           partial_name="ztrf"
           interfaces=$(ip addr show | grep -oP "(?<=: )$partial_name\S*")
           for interface in $interfaces; do
               ip_address=$(ip addr show $interface | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
           done
+          wx_push_url="https://wxpusher.zjiecode.com/api/send/message/?appToken=$WX_PUSH_APP_TOKEN&content=ubuntu:$ip_address&uid=$WX_UID&url=http%3a%2f%2fwxpusher.zjiecode.com"
+          wx_data=$(curl -s "$wx_push_url")
+          echo $wx_data
+          sleep 21420
           url="https://api.zerotier.com/api/v1/network/$ZEROTIER_ID/member"
           json_response=$(curl -s -X GET -H "Authorization: token $ZEROTIER_TOKEN" "$url")
           echo "$json_response" | jq -c '.[]' | while read -r obj; do
