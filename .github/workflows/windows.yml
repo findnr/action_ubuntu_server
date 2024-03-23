@@ -44,7 +44,8 @@ jobs:
          $defaultPassword = ConvertTo-SecureString "qaz,123456" -AsPlainText -Force
          Set-LocalUser -Name $currentUsername -Password $defaultPassword
          $networkAdapter = Get-NetIPAddress -InterfaceAlias "*One*" -AddressFamily IPv4
-         $response=Invoke-RestMethod -Uri "https://wxpusher.zjiecode.com/api/send/message/?appToken=${env:WX_PUSH_APP_TOKEN}&content=win:$networkAdapter.IPAddress&uid=${env:WX_UID}&url=http%3a%2f%2fwxpusher.zjiecode.com" -Method Get
+         $ip=$networkAdapter.IPAddress
+         $response=Invoke-RestMethod -Uri "https://wxpusher.zjiecode.com/api/send/message/?appToken=${env:WX_PUSH_APP_TOKEN}&content=win:$ip&uid=${env:WX_UID}&url=http%3a%2f%2fwxpusher.zjiecode.com" -Method Get
          Write-Output $response
          Start-Sleep -Seconds 21300
     - name: delete network node
