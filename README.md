@@ -1,5 +1,15 @@
+### 增加微信推送机器的ip地址信息，已经注明是win还是ubuntu，这样就不再登录zerotier去查看ip信息了
+- 使用的是wxpusher平台来推送ip信息
+- 第一步关注wxpusher公众号
+- 第二步登录管理后台
+- 第三步生成一个应用
+- 第四步关注应用
+- 第五步获取UID
+- 第六步获取APP_TOKEN
+- 将UID和APP_TOKEN配制到环境变WX_UID，WX_PUSH_APP_TOKEN（这样就可以实现推送到手机的微信上）
 ### 增加zerotier通过接口自动调去当前系统的接口ip进行删除，免去手动删除的麻烦（2024-03-21）
 - 思路是获取到当前节点，通过当前系统接口获取到IP地址，再通过获取到的IP地址和本址的ip地址进行匹配，再获取到menberId,再调接口删除
+- 需要配制ZEROTIER_TOKEN，这个token是要登录zerotier.com到自己的用户信息中去获取。
 ### 增加openwrt_lede项目的编译脚本，可编译（x86,r68s）的固件，r68s固件IP地址：192.168.1.180 x86固件的IP地址：192.168.1.181 (2024-03-11)
 - openwrt_lede/r68s_auto.sh (r68s固件)
 - openwrt_lede/x86_auto.sh (x86固件)
