@@ -20,6 +20,14 @@ jobs:
          cd 'C:\Program Files (x86)\ZeroTier\One\'
          ./zerotier_desktop_ui.exe
     - uses: cygwin/cygwin-install-action@master
+    - name: join zerotier network id
+      env:
+        ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
+        WX_PUSH_APP_TOKEN: ${{ secrets.WX_PUSH_APP_TOKEN }}
+        WX_UID: ${{ secrets.WX_UID }}
+      run: |
+         cd 'C:\Program Files (x86)\ZeroTier\One\'
+         ./zerotier-cli join "${env:ZEROTIER_ID}"
     - name: install sougou wubi
       run: |
         $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
@@ -34,15 +42,13 @@ jobs:
         $downloadUrl = $release.assets | Where-Object { $_.name -eq "sougoupinyin.exe" } | Select-Object -ExpandProperty browser_download_url
         Invoke-WebRequest -Uri $downloadUrl -OutFile "sougoupinyin.exe"
         # Start-Process -FilePath "D:\a\actions_os\actions_os\sougoupinyin.exe" -ArgumentList "/S" -Wait -NoNewWindow
-    - name: setting remote password qaz,123456
+    - name: set runneradmin password and use wxpush push ip address own weixin
       env:
         ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
         WX_PUSH_APP_TOKEN: ${{ secrets.WX_PUSH_APP_TOKEN }}
         WX_UID: ${{ secrets.WX_UID }}
       run: |
          cd 'C:\Program Files (x86)\ZeroTier\One\'
-         ./zerotier-cli join "${env:ZEROTIER_ID}"
-         Start-Sleep -Seconds 10
          ./zerotier-cli info
          ipconfig
          $currentUsername = $env:USERNAME
