@@ -6,6 +6,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
+    - uses: cygwin/cygwin-install-action@master
     - name: install sougou wubi
       run: |
         $url = "https://api.github.com/repos/${{ github.repository }}/releases/latest"
