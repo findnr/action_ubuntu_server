@@ -1,3 +1,5 @@
+### windows系统中增加cygwin的支持，方便使用windows来构建linux上的运行的程序，编译成windows的应用程序
+- 使用的是github应用市场中的项目，地址：https://github.com/cygwin/cygwin-install-action
 ### 增加微信推送机器的ip地址信息，已经注明是win还是ubuntu，这样就不再登录zerotier去查看ip信息了
 - 使用的是wxpusher平台来推送ip信息
 - 第一步关注wxpusher公众号
