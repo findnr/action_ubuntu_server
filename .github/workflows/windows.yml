@@ -42,6 +42,16 @@ jobs:
         $downloadUrl = $release.assets | Where-Object { $_.name -eq "sougoupinyin.exe" } | Select-Object -ExpandProperty browser_download_url
         Invoke-WebRequest -Uri $downloadUrl -OutFile "sougoupinyin.exe"
         # Start-Process -FilePath "D:\a\actions_os\actions_os\sougoupinyin.exe" -ArgumentList "/S" -Wait -NoNewWindow
+    - name: create desktop link
+      run: |
+        $TargetPath = Get-Location
+        $DesktopPath = [Environment]::GetFolderPath("Desktop")
+        $ShortcutName = "install.lnk"
+        $ShortcutPath = Join-Path -Path $DesktopPath -ChildPath $ShortcutName
+        $WScriptShell = New-Object -ComObject WScript.Shell
+        $Shortcut = $WScriptShell.CreateShortcut($ShortcutPath)
+        $Shortcut.TargetPath = $TargetPath
+        $Shortcut.Save()
     - name: set runneradmin password and use wxpush push ip address own weixin
       env:
         ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
