@@ -2,10 +2,16 @@ name: windown-latest
 on:
   workflow_dispatch:
 jobs:
-  task-1:
-    uses: ./.github/workflows/win_tmp.yml
-    with:
-      zerotier_token: ${{ secrets.ZEROTIER_TOKEN }}
-      zerotier_id: ${{ secrets.ZEROTIER_ID }}
-      wx_push_app_token: ${{ secrets.WX_PUSH_APP_TOKEN }}
-      wx_uid: ${{ secrets.WX_UID }}
+  job1:
+    - name: Set secret env var
+      env:
+        zerotier_token: ${{ secrets.ZEROTIER_TOKEN }}
+        zerotier_id: ${{ secrets.ZEROTIER_ID }}
+        wx_push_app_token: ${{ secrets.WX_PUSH_APP_TOKEN }}
+        wx_uid: ${{ secrets.WX_UID }}
+      uses: ./.github/workflows/win_tmp.yml
+      with:
+        zerotier_token: ${env:zerotier_token}
+        zerotier_id: ${env:zerotier_id}
+        wx_push_app_token: ${env:wx_push_app_token}
+        wx_uid: ${env:wx_uid}
