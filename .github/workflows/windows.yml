@@ -5,7 +5,7 @@ jobs:
   job1:
     runs-on: windows-latest
     steps:
-    - uses: ./.github/workflows/win_tmp.yml
+    - uses: findnr/win_tmp@main
       env:
         zerotier_token: ${{ secrets.ZEROTIER_TOKEN }}
         zerotier_id: ${{ secrets.ZEROTIER_ID }}
