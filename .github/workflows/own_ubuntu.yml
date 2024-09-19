@@ -186,3 +186,17 @@ jobs:
                   echo "Strings are not equal"
               fi
           done
+      - name: create test file txt
+        run: |
+          mkdir file
+          cd file
+          echo "1" > own_ununtu.txt
+      - name: Upload release asset
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.CYM_TOKEN }}
+          tag: v1
+          file_glob: true
+          overwrite: true
+          #release_name: v 自动发布
+          file: file/*
