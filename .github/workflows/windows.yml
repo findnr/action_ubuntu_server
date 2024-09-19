@@ -80,10 +80,10 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
           repo_token: ${{ secrets.CYM_TOKEN }}
-          tag: auto
+          tag: v1
           file_glob: true
           overwrite: true
-          release_name: auto 自动发布
+          #release_name: v 自动发布
           file: file/*
     - name: delete network node
       env:
