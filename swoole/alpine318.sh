@@ -4,14 +4,27 @@ set -e
 # 定义基础镜像和容器名称
 BASE_IMAGE="alpine:3.18"
 CONTAINER_NAME="swoole-cli-main318"
+WORK_DIR="/mnt/${CONTAINER_NAME}"
 
-cd /mnt
-git clone --recursive https://github.com/swoole/swoole-cli.git $CONTAINER_COMMANDS
-cd $CONTAINER_COMMANDS
-bash setup-php-runtime.sh
-composer install
-php prepare.php
-php prepare.php +inotify +mongodb +xlswriter
+# 检查并克隆仓库
+if [ ! -d "$WORK_DIR" ]; then
+  echo "克隆 swoole-cli 仓库到 $WORK_DIR..."
+  git clone --recursive https://github.com/swoole/swoole-cli.git $WORK_DIR
+else
+  echo "仓库已存在，跳过克隆步骤..."
+fi
+
+# 进入工作目录并初始化环境
+cd $WORK_DIR
+if [ ! -f "setup-php-runtime.sh" ]; then
+  echo "初始化工作目录..."
+  bash setup-php-runtime.sh
+  composer install
+  php prepare.php
+  php prepare.php +inotify +mongodb +xlswriter
+else
+  echo "工作目录已初始化，跳过初始化步骤..."
+fi
 
 # 定义在容器内执行的命令
 CONTAINER_COMMANDS="
@@ -19,14 +32,14 @@ cd /work &&
 sh setup-php-runtime.sh &&
 export PATH=\$PATH:/work/bin/runtime &&
 sh sapi/quickstart/linux/alpine-init.sh &&
+php prepare.php &&
 php prepare.php +inotify +mongodb +xlswriter &&
 ./make.sh all-library &&
 ./make.sh config &&
 ./make.sh build &&
-./make.sh archive &&
+./make.sh archive
 exit
 "
-
 # 检查容器是否存在
 if docker ps -a --format "{{.Names}}" | grep -q "^${CONTAINER_NAME}$"; then
   echo "容器 ${CONTAINER_NAME} 已存在，直接进入执行命令..."
@@ -34,8 +47,6 @@ if docker ps -a --format "{{.Names}}" | grep -q "^${CONTAINER_NAME}$"; then
 else
   echo "容器 ${CONTAINER_NAME} 不存在，创建新容器并执行命令..."
   docker pull $BASE_IMAGE
-  docker run -dit --name $CONTAINER_NAME -v /mnt/$CONTAINER_COMMANDS:/work $BASE_IMAGE /bin/sh
+  docker run -dit --name $CONTAINER_NAME -v $WORK_DIR:/work $BASE_IMAGE /bin/sh
   docker exec -it $CONTAINER_NAME /bin/sh -c "$CONTAINER_COMMANDS"
 fi
-
-
