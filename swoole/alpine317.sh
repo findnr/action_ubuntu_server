@@ -22,7 +22,8 @@ php prepare.php +inotify +mongodb +xlswriter &&
 ./make.sh all-library &&
 ./make.sh config &&
 ./make.sh build &&
-./make.sh archive
+./make.sh archive &&
+exit
 "
 
 # 检查容器是否存在
