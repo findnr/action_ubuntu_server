@@ -16,15 +16,10 @@ fi
 
 # 进入工作目录并初始化环境
 cd $WORK_DIR
-if [ ! -f "setup-php-runtime.sh" ]; then
-  echo "初始化工作目录..."
-  bash setup-php-runtime.sh
-  composer install
-  php prepare.php
-  php prepare.php +inotify +mongodb +xlswriter
-else
-  echo "工作目录已初始化，跳过初始化步骤..."
-fi
+bash setup-php-runtime.sh
+composer install
+php prepare.php
+php prepare.php +inotify +mongodb +xlswriter
 
 # 定义在容器内执行的命令
 CONTAINER_COMMANDS="
