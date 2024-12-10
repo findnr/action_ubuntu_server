@@ -1,16 +1,17 @@
 #!/bin/bash
 set -e
-cd /mnt
-git clone --recursive https://github.com/swoole/swoole-cli.git
-cd swoole-cli
-bash setup-php-runtime.sh
-composer install
-php prepare.php
-php prepare.php +inotify +mongodb +xlswriter
 
 # 定义基础镜像和容器名称
 BASE_IMAGE="alpine:3.18"
 CONTAINER_NAME="swoole-cli-main318"
+
+cd /mnt
+git clone --recursive https://github.com/swoole/swoole-cli.git $CONTAINER_COMMANDS
+cd $CONTAINER_COMMANDS
+bash setup-php-runtime.sh
+composer install
+php prepare.php
+php prepare.php +inotify +mongodb +xlswriter
 
 # 定义在容器内执行的命令
 CONTAINER_COMMANDS="
@@ -33,7 +34,7 @@ if docker ps -a --format "{{.Names}}" | grep -q "^${CONTAINER_NAME}$"; then
 else
   echo "容器 ${CONTAINER_NAME} 不存在，创建新容器并执行命令..."
   docker pull $BASE_IMAGE
-  docker run -dit --name $CONTAINER_NAME -v /mnt/swoole-cli:/work $BASE_IMAGE /bin/sh
+  docker run -dit --name $CONTAINER_NAME -v /mnt/$CONTAINER_COMMANDS:/work $BASE_IMAGE /bin/sh
   docker exec -it $CONTAINER_NAME /bin/sh -c "$CONTAINER_COMMANDS"
 fi
 
