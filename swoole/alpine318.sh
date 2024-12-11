@@ -11,7 +11,8 @@ if [ ! -d "$WORK_DIR" ]; then
   echo "克隆 swoole-cli 仓库到 $WORK_DIR..."
   git clone --recursive https://github.com/swoole/swoole-cli.git $WORK_DIR
 else
-  echo "仓库已存在，跳过克隆步骤..."
+  sudo rm -rf $WORK_DIR
+  git clone --recursive https://github.com/swoole/swoole-cli.git $WORK_DIR
 fi
 
 # 进入工作目录并初始化环境
