@@ -1,4 +1,4 @@
-name: windown-latest
+name: windown-2025
 on:
   workflow_dispatch:
 jobs:
