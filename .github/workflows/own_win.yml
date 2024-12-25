@@ -5,7 +5,7 @@ on:
     - cron: 30 22 * * *
 jobs:
   job1:
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
     - name: install zerotier
       env:
@@ -90,7 +90,7 @@ jobs:
         }
   job2:
     needs: job1
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
     - name: install zerotier
       env:
@@ -175,7 +175,7 @@ jobs:
         }
   job3:
     needs: [job1,job2]
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
     - name: install zerotier
       env:
