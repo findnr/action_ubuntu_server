@@ -4,7 +4,7 @@ on:
   workflow_call:  # 允许其他工作流调用
 jobs:
   job1:
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
     - name: install zerotier
       env:
