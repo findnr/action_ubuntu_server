@@ -20,7 +20,7 @@ jobs:
          Start-Process -FilePath "msiexec.exe" -ArgumentList "/i $installerPath /qn /norestart" -Wait
          cd 'C:\Program Files (x86)\ZeroTier\One\'
          ./zerotier_desktop_ui.exe
-    - uses: cygwin/cygwin-install-action@master
+    # - uses: cygwin/cygwin-install-action@master
     - name: join zerotier network id
       env:
         ZEROTIER_ID: ${{ secrets.ZEROTIER_ID }}
